@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Зумерский → человеческий</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5fb;--surface:#ffffff;--ink:#16203a;--muted:#5b6580;--line:#dbe1f0;--blue:#4257e6;--blue-soft:#e6eaff;--red:#e8474f;--red-soft:#ffe7e8;--mark:#ffe58a;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111628;--surface:#1a2140;--ink:#e9edfb;--muted:#9aa5c8;--line:#2c3566;--blue:#8c9bff;--blue-soft:#252e63;--red:#ff7b82;--red-soft:#4a2330;--mark:#6b5a14;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111628;--surface:#1a2140;--ink:#e9edfb;--muted:#9aa5c8;--line:#2c3566;--blue:#8c9bff;--blue-soft:#252e63;--red:#ff7b82;--red-soft:#4a2330;--mark:#6b5a14;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 18px 56px}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.08;font-weight:800;margin:6px 0 10px;letter-spacing:-.02em}
+h1 span{color:var(--blue)}
+.lead{color:var(--muted);margin:0 0 24px;max-width:56ch}
+.tabs{display:inline-flex;background:var(--blue-soft);border-radius:12px;padding:4px;gap:4px;margin-bottom:14px}
+.tabs button{border:0;background:transparent;color:var(--ink);font:inherit;font-weight:500;padding:9px 18px;border-radius:9px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);box-shadow:0 1px 3px rgba(20,30,70,.18);font-weight:700}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px}
+.box input,.box textarea{width:100%;border:0;background:transparent;color:var(--ink);font:inherit;font-size:20px;padding:14px 14px;resize:vertical}
+.box input:focus-visible,.box textarea:focus-visible{outline:none}
+.box:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+textarea{min-height:110px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.chips button{font:inherit;font-size:15px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 13px;border-radius:999px;cursor:pointer}
+.chips button:hover{border-color:var(--blue)}
+.bar-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 4px;color:var(--muted);font-size:15px}
+.sort{font:inherit;font-size:15px;border:0;background:none;color:var(--blue);cursor:pointer;text-decoration:underline;padding:4px}
+.entry{display:grid;grid-template-columns:150px 1fr;gap:6px 22px;padding:20px 0;border-top:1px solid var(--line)}
+.entry h2{margin:0;font-size:26px;line-height:1.15;font-weight:800;word-break:break-word}
+.entry .al{color:var(--muted);font-size:14px;margin-top:2px}
+.mean{margin:0 0 8px;font-size:18px}
+.ru{display:inline-block;background:var(--blue-soft);padding:3px 11px;border-radius:8px;font-weight:500;margin-bottom:10px}
+.ex{margin:0 0 6px;padding-left:12px;border-left:3px solid var(--line);font-style:italic}
+.orig{margin:0 0 12px;color:var(--muted);font-size:15px}
+.meter{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.track{flex:0 0 150px;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.empty{padding:28px 0;color:var(--muted);border-top:1px solid var(--line)}
+.out{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;font-size:20px;line-height:1.7;min-height:64px;margin-top:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+mark{background:var(--mark);color:var(--ink);border-radius:5px;padding:1px 5px;font-weight:700}
+.found{margin-top:6px}
+.found .entry{grid-template-columns:1fr;padding:14px 0}
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.nav button{font:inherit;font-size:15px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 15px;border-radius:999px;cursor:pointer}
+.nav button:hover{border-color:var(--blue)}
+.info{margin-top:52px;padding-top:10px;border-top:1px solid var(--line)}
+.info h2{font-size:28px;font-weight:800;margin:14px 0 10px;letter-spacing:-.01em}
+.info p{max-width:64ch;margin:0 0 12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat b{display:block;font-size:36px;font-weight:800;line-height:1.1}
+.stat span{color:var(--muted);font-size:14px}
+.legend{display:flex;gap:18px;font-size:14px;color:var(--muted);margin:18px 0 6px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:99px;margin-right:6px;vertical-align:-1px}
+.crow{display:grid;grid-template-columns:84px 1fr;gap:10px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.bl{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:2px 0}
+.bl .tr{flex:1}
+.bl i{display:block;height:12px;border-radius:99px;min-width:3px}
+.bl em{font-style:normal;width:40px;text-align:right}
+.verdict{background:var(--blue-soft);border-radius:14px;padding:16px 18px;margin-top:18px;max-width:64ch}
+[hidden]{display:none!important}
+@media (max-width:600px){.entry{grid-template-columns:1fr}.track{flex-basis:110px}}
+</style>
+</head>
+<body>
+<main>
+<nav class="nav"><button type="button" data-go="top">Словарь</button><button type="button" data-go="about">О проекте</button><button type="button" data-go="results">Результаты опроса</button></nav>
+<h1>Зумерский <span>→</span> человеческий</h1>
+<p class="lead">Услышали незнакомое слово от детей, студентов или коллег? Введите его здесь или вставьте целую фразу, и мы объясним, что имелось в виду.</p>
+
+<div class="tabs" role="tablist">
+  <button role="tab" id="t1" aria-selected="true" aria-controls="p1">Найти слово</button>
+  <button role="tab" id="t2" aria-selected="false" aria-controls="p2">Перевести фразу</button>
+</div>
+
+<section id="p1" role="tabpanel" aria-labelledby="t1">
+  <div class="box"><input id="q" type="search" placeholder="Например: вайб, нпс, имба" autocomplete="off" aria-label="Слово для поиска"></div>
+  <div class="chips" id="chips"></div>
+  <div class="bar-row"><span id="count"></span><button class="sort" id="sort" type="button">Показать сначала самые непонятные</button></div>
+  <div id="list"></div>
+</section>
+
+<section id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <div class="box"><textarea id="phrase" placeholder="Вставьте фразу, которую вы услышали или прочитали" aria-label="Фраза для перевода"></textarea></div>
+  <div class="chips" id="samples"></div>
+  <div class="out" id="out" aria-live="polite">Здесь появится фраза с выделенными сленговыми словами.</div>
+  <div class="found" id="found"></div>
+</section>
+
+<section class="info" id="about">
+<h2>О проекте</h2>
+<p>Тема нашей работы: «Сленг поколения Z: мост или стена между нами и обществом». Мы, Арман и Александр, хотели выяснить не просто «мешает ли сленг», а насколько сильно. Для этого мы опросили 19 человек и собрали словарь, который помогает старшим понимать молодёжную речь.</p>
+<p>Началось всё дома: старшая сестра говорит новое слово, а мама пытается повторить его и просит объяснить, что оно значит. Этот словарь сделан для таких разговоров.</p>
+</section>
+<section class="info" id="results">
+<h2>Что показал опрос</h2>
+<p>Мы дали семь фраз со сленгом и три варианта значения. Верным был один, кроме него был ответ «Не знаю». В опросе участвовали 14 молодых людей (до 25 лет) и 5 человек в возрасте 40–55 лет.</p>
+<div class="stats">
+<div class="stat"><b>8%</b><span>ответов не поняли молодые</span></div>
+<div class="stat"><b>49%</b><span>ответов не поняли люди 40–55 лет</span></div>
+<div class="stat"><b>≈ в 6 раз</b><span>старшие чаще не понимают сленг</span></div>
+</div>
+<div class="legend"><span><i style="background:var(--blue)"></i>Молодые, до 25 лет</span><span><i style="background:var(--red)"></i>40–55 лет</span><span>Доля верных ответов, %</span></div>
+<div id="chart"></div>
+<div class="verdict"><b>Мост или стена?</b> Барьер есть: старшие поняли только 18 из 35 фраз. Но это не глухая стена: «вайб» и «пикми» поняли почти все. Скорее стена с проходами, и проходы там, где слово успело выйти за пределы молодёжной среды.</div>
+<p style="margin-top:14px;color:var(--muted);font-size:14px">Выборка маленькая (19 человек, из них старших пятеро), поэтому цифры показывают ориентир, а не точную статистику по поколениям.</p>
+</section>
+<footer>Проценты взяты из нашего опроса 25 октября 2026 года: ответили 19 человек, среди них 5 в возрасте 40–55 лет. Выборка небольшая, поэтому цифры показывают ориентир, а не точную статистику. У слов без полоски данных опроса нет. Словарь не претендует на полноту: сленг меняется быстрее, чем его успевают записывать. Значения некоторых слов (например, «пикми» и «скуф») в источниках толкуются по-разному. Проект по русскому языку, Президентская академия.</footer>
+</main>
+
+<script>
+var D=[
+{w:'Вайб',al:['вайб'],m:'Особая атмосфера, настроение места или человека.',ru:'атмосфера, настроение',o:'От англ. vibe. Пришло через соцсети.',ex:'У этой кофейни классный вайб.',p:100},
+{w:'NPC',al:['нпс','npc','энписи'],m:'Человек, который ведёт себя шаблонно и не высказывает собственного мнения.',ru:'статист, человек без своего мнения',o:'От англ. non-player character, «неигровой персонаж» из видеоигр.',ex:'Он как NPC: что ни скажи, отвечает одно и то же.',p:60},
+{w:'Имба',al:['имба','имбо','имбы','имбу','имбе'],m:'Слишком сильный, выделяется на фоне остальных. В разговоре часто значит просто «очень круто».',ru:'сильнейший, превосходный',o:'От «имбаланс» (англ. imbalance), слова из игр.',ex:'Этот персонаж просто имба.',p:20},
+{w:'Дроп',al:['дроп'],m:'Выпуск ограниченной партии товара, например кроссовок или одежды. В играх так называют предмет, который выпал из побеждённого врага.',ru:'ограниченная серия, новая партия',o:'От англ. drop. Из игр и уличной моды.',ex:'Вышел новый дроп кроссовок.',p:null},
+{w:'Тильт',al:['тильт'],m:'Сильное раздражение и потеря самообладания после неудачи.',ru:'вспыльчивость после неудачи',o:'От англ. tilt. Сначала термин покера, потом игр.',ex:'Я словил тильт после проигрыша.',p:40},
+{w:'Свэг',al:['свэг','свег','swag'],m:'Стиль, уверенность, харизма.',ru:'стиль и уверенность',o:'От англ. swag. Пришло из хип-хоп-культуры.',ex:'У него свэг.',p:20},
+{w:'Прайм',al:['прайм','prime'],m:'Лучший период, пик формы. У слова есть и другие значения (например, подписка на сервис), поэтому смотрите по контексту.',ru:'расцвет, пик формы',o:'От англ. prime.',ex:'Он сейчас в прайме.',p:null},
+{w:'Пикми',al:['пикми','pickme'],m:'Девушка, которая демонстративно подчёркивает «я не такая, как все», чтобы понравиться.',ru:'девушка «не как все» напоказ',o:'От англ. pick me, «выбери меня». Из соцсетей.',ex:'Она типичная пикми.',p:80},
+{w:'Скуф',al:['скуф'],m:'Взрослый мужчина с нарочито бытовым стилем и привычками.',ru:'взрослый мужчина «в домашнем стиле»',o:'По распространённой версии, сокращение, родившееся на интернет-форумах.',ex:'Старая куртка, термос с чаем: типичный скуф.',p:40},
+{w:'Темки',al:['темк'],m:'Свои дела и схемы, часто сомнительные.',ru:'дела, делишки',o:'От слова «тема» в значении «дело, замысел».',ex:'Он занимается своими темками.',p:null},
+{w:'Байтить',al:['байт','забайт'],m:'Провоцировать, заманивать на реакцию. «Не байтись» значит «не поддавайся на провокацию».',ru:'провоцировать',o:'От англ. bait, «наживка».',ex:'Он специально байтит людей в комментариях.',p:null}
+];
+[['Кринж',['кринж'],[],'Испанский стыд: что-то неловкое, от чего хочется отвернуться.','неловкость, испанский стыд','англ. cringe','Это видео такой кринж.'],
+['Краш',[],['краш','крашу','краша','крашем'],'Человек, который нравится, объект тайной симпатии.','симпатия, «зазноба»','англ. crush','Она мой краш с первого курса.'],
+['Рофл',['рофл'],[],'Шутка, прикол; «рофлить» значит шутить.','шутка, розыгрыш','англ. ROFL, «катаюсь по полу от смеха»','Я просто рофлю, не обижайся.'],
+['Хайп',['хайп'],[],'Шумиха и ажиотаж вокруг чего-то, погоня за популярностью.','шумиха, ажиотаж','англ. hype','Вокруг новой игры сплошной хайп.'],
+['Хейт',['хейт'],[],'Ненависть и придирки без причины; «хейтер» постоянно критикует.','ненависть, злая критика','англ. hate','Под клипом полно хейта.'],
+['Флекс',['флекс'],[],'Хвастаться, красоваться достижениями или вещами.','хвастовство','англ. flex, «напрягать мышцу»','Он флексит новыми часами.'],
+['Чилл',['чилл','чилить','чилим'],[],'Расслабляться, отдыхать без дел и планов.','отдыхать, расслабляться','англ. chill','Сегодня просто чиллим дома.'],
+['Лол / кек',[],['лол','кек','lol'],'Реакция «смешно»; так подписывают шутку.','«смешно»','англ. LOL; «кек» пришло из онлайн-игр','Лол, он правда это сказал?'],
+['Ауф',[],['ауф'],'Восклицание восторга и одобрения; часто иронично.','«здорово!», «ничего себе!»','Из интернет-мемов, связано с мемом про волка','Ауф, вот это скорость!'],
+['Агр',['агрить','агриться','агрись','агрюсь'],['агр'],'Злиться, раздражаться; «агрить» значит выводить из себя.','злиться, провоцировать','От англ. aggro (агрессия), слово из игр','Не агрись, это шутка.'],
+['Душнила',['душнил','душнить'],['душный'],'Нудный человек, который придирается к мелочам и поучает.','зануда','От «душный»: с таким тяжело и нечем дышать','Не будь душнилой, мы просто смотрим кино.'],
+['Токсик',['токсик','токсичн'],[],'Человек, который портит общение грубостью и негативом.','грубиян, отравляющий атмосферу','англ. toxic','Из чата все ушли из-за токсика.'],
+['Зашквар',['зашквар'],[],'Позор, поступок, за который стыдно и который портит репутацию.','позор','Из тюремного жаргона','Ходить в таком — зашквар.'],
+['Ливнуть',['ливнуть','ливну','ливай','ливать','ливаю'],[],'Быстро уйти или выйти из чата, игры, компании.','уйти, выйти','От англ. leave','Он ливнул из беседы посреди спора.'],
+['Донат',['донат'],[],'Деньги, которые отправляют стримеру или автору в поддержку; в играх ещё платные покупки.','пожертвование','англ. donate','Скинул стримеру донат.'],
+['Стрим',['стрим'],[],'Прямая трансляция в интернете, чаще игры или разговор.','прямой эфир','англ. stream','Сегодня вечером у него стрим.'],
+['Скип',[],['скип','скипнуть','скипнул','скипай','скипаю','скипать'],'Пропустить: рекламу, видео, часть разговора.','пропустить','англ. skip','Рекламу сразу скипаю.'],
+['Рандом',['рандом'],[],'Нечто случайное и непредсказуемое; «рандомный» ещё и странный.','случайность, случайный','англ. random','Мне попался рандомный человек.'],
+['Лойс',['лойс'],[],'Лайк, одобрение в соцсетях.','лайк','Шутливое искажение слова «лайк»','Поставь лойс на фото.'],
+['Изи',[],['изи'],'Легко, без усилий.','легко, просто','англ. easy','Контрольная была изи.'],
+['Мейн',[],['мейн','мейна','мейну','мейном'],'Основной, главный; в играх персонаж, за которого играют чаще всего.','основной, главный','англ. main','Мой мейн — маг.'],
+['Буст',['буст'],[],'Ускорение, усиление; «забустить» значит помочь подняться.','ускорение, помощь','англ. boost','Друг забустил мне рейтинг.'],
+['Фейл',['фейл'],[],'Провал, неудача, глупая ошибка.','провал','англ. fail','Вот это фейл.'],
+['Читер',['читер'],[],'Тот, кто жульничает (в играх, на экзамене); «читерить» значит мухлевать.','жулик','англ. cheat','Его забанили как читера.'],
+['Нуб',[],['нуб','нубы','нуба','нубов'],'Новичок, неумелый игрок; иногда звучит обидно.','новичок','англ. noob, от newbie','Не обижай нуба.'],
+['Фарм',[],['фарм','фармить','фармлю','фармим'],'Многократно повторять действие ради награды; шире — копить лайки, деньги, опыт.','«нарабатывать»','англ. farm','Фармим опыт всю ночь.'],
+['Годно',['годно','годнот','годный'],[],'Хорошо, качественно, одобряю; «годнота» значит хороший контент.','хорошо, достойно','От слова «годный»','Фильм очень годный.'],
+['Зумер',['зумер'],[],'Человек из поколения Z. Границы по годам рождения в источниках разные.','представитель поколения Z','англ. zoomer','Мой брат типичный зумер.'],
+['Бумер',[],['бумер','бумеры','бумера','бумеров','бумерам','бумеру','бумером'],'Человек старшего поколения; часто с насмешкой, поэтому может обидеть.','«старшее поколение»','От англ. baby boomer','Бумеры не пользуются мессенджерами.'],
+['Вписка',['вписк'],[],'Вечеринка в чьей-то квартире, куда можно прийти по знакомству.','домашняя вечеринка','От «вписаться»','В субботу вписка у Артёма.'],
+['Движ',[],['движ','движа','движуха','движуху','движухи'],'Оживлённая активность, событие, веселье.','веселье, активность','От «движение»','Там сегодня жуткий движ.'],
+['Сигма',['сигма'],[],'Уверенный, независимый человек, живущий по своим правилам; обычно иронично.','независимый одиночка','Из интернет-мемов, по названию греческой буквы','Он сигма, ему никто не нужен.'],
+['Гигачад',['гигачад'],[],'Образ идеально сильного, уверенного мужчины; часто в шутку.','«настоящий мужик» в шутку','«Гига» + мем Chad','Вышел из зала как гигачад.'],
+['Шеймить',['шейм'],[],'Стыдить и высмеивать за что-либо.','стыдить, высмеивать','англ. shame','Не шеймь его за оценку.'],
+['Сорян',[],['сорян','сори','сорри'],'Извини, прости (не слишком серьёзно).','извини','англ. sorry','Сорян, опоздаю на пять минут.'],
+['Чекнуть',['чекнуть','чекни','чекнул','чекать','чекаю','чекай'],[],'Проверить, посмотреть.','проверить','англ. check','Чекни, пришло ли сообщение.'],
+['Забанить',['забан'],[],'Заблокировать пользователя в сети или игре.','заблокировать','англ. ban','Его забанили за спам.'],
+['Скроллить',['скролл'],[],'Бездумно листать ленту соцсетей.','листать ленту','англ. scroll','Весь вечер скроллю ленту.'],
+['Лаг',[],['лаг','лаги','лага','лагать','лагает','лагнул','лагаю'],'Задержка и тормоза в сети или игре; шутя говорят и про человека, который долго соображает.','задержка, «тормозит»','англ. lag','У меня лагает интернет.'],
+['Тейк',['тейк'],[],'Мнение; «горячий тейк» значит резкое, спорное мнение.','мнение','англ. take','Какой у тебя тейк на этот фильм?'],
+['Жиза',[],['жиза','жизу','жизы'],'«Как в жизни»: так бывает со всеми, знакомая ситуация.','«так и есть»','От слова «жизнь»','Опоздал на пару — жиза.'],
+['Нормис',['нормис'],[],'Обычный человек, не разбирающийся в интернет-мемах и субкультурах.','«обычный человек»','англ. normie','Нормисы этот мем не поймут.'],
+['Могну',['могну','могнуть','могнул','могать','могаю','могает','моггинг'],[],'Затмить кого-то внешностью, харизмой или успехами; «я тебя могну» значит «на моём фоне ты будешь выглядеть хуже».','затмить, превзойти','От англ. mog (превосходить внешне); в русском популярность добавил трек ЦУЕФА «Я тебя могну» (июль 2026)','Угораешь? Я тебя могну на раз-два!'],
+['Ларп',['ларп'],[],'Изображать из себя кого-то, притворяться; в шутку так говорят о человеке, который строит из себя крутого.','притворство, ролевая игра','От англ. LARP, ролевых игр вживую','Он ларпит бизнесмена, а сам студент.'],
+['6-7',[],['сикс','севен','six','seven'],'Мем без точного смысла: «шесть-семь» говорят в шутку, обычно с покачиванием руками.','бессмысленная шутка-мем','Из интернет-мемов последних лет','Спросил про оценку, а он: сикс-севен!'],
+['Потрачено',[],['потрачено'],'Всё пропало, провал, конец; так шутят о неудаче или проигрыше.','всё пропало, провал','От надписи Wasted («Потрачено») в русской локализации игр серии GTA','Контрольная написана, потрачено.'],
+['Рилс',['рилс'],['шортс'],'Короткое вертикальное видео в соцсетях.','короткое видео','От англ. reels и shorts, названий форматов Instagram и YouTube','Залип на рилсах до утра.'],
+['Скибиди',['скибиди'],[],'Слово без постоянного смысла: в зависимости от контекста значит «круто», «странно» или просто смешной звук.','бессмыслица, «что-то странное»','Из мема «Скибиди туалеты» (англ. Skibidi Toilet), 2023 год','Что за скибиди у тебя на экране?'],
+['Ризз',['ризз'],[],'Умение обаять и расположить к себе, флиртовать; харизма.','харизма, обаяние','От англ. rizz, сокращения от charisma','У него ризз, к нему все тянутся.'],
+['Аура',[],['аура','ауры','ауру','ауре'],'Условные очки «крутости»: «плюс аура» за уверенный поступок, «минус аура» за неловкий. Смотрите по контексту: у слова есть и обычное значение.','крутость, впечатление','Из соцсетей, шутливое использование слова «аура»','Уронил поднос, минус аура.'],
+['Брейнрот',['брейнрот'],[],'Бессмысленный низкокачественный контент, который затягивает; так же называют сам эффект от него.','«гниение мозга», бессмыслица','От англ. brain rot («гниение мозга»)','Три часа роликов, сплошной брейнрот.']
+].forEach(function(r){D.push({w:r[0],al:r[1],x:r[2],m:r[3],ru:r[4],o:r[5]+'.',ex:r[6],p:null})});
+D.sort(function(a,b){return a.w.localeCompare(b.w,'ru')});
+var norm=function(s){return s.toLowerCase().replace(/ё/g,'е')};
+var $=function(id){return document.getElementById(id)};
+var byHard=false;
+
+function entryEl(e){
+  var d=document.createElement('article');d.className='entry';
+  var l=document.createElement('div');
+  var h=document.createElement('h2');h.textContent=e.w;l.appendChild(h);
+  if(e.al.length>1&&e.w!==e.al[0]){}
+  d.appendChild(l);
+  var r=document.createElement('div');
+  function add(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;x.textContent=txt;r.appendChild(x);return x}
+  add('p','mean',e.m);
+  add('span','ru','По-русски: '+e.ru);
+  r.appendChild(document.createElement('br'));
+  add('p','ex','«'+e.ex+'»');
+  add('p','orig',e.o);
+  var mt=document.createElement('div');mt.className='meter';
+  if(e.p===null){mt.textContent='В опросе это слово не участвовало.'}
+  else{
+    var t=document.createElement('div');t.className='track';
+    var f=document.createElement('div');f.className='fill';f.style.width=e.p+'%';f.style.background=e.p<50?'var(--red)':'var(--blue)';
+    t.appendChild(f);mt.appendChild(t);
+    var s=document.createElement('span');s.textContent='Поняли '+e.p+'% старших';mt.appendChild(s);
+  }
+  r.appendChild(mt);d.appendChild(r);return d;
+}
+
+function match(e,q){
+  if(!q)return true;
+  var hit=e.al.concat(e.x||[]).some(function(a){return a.indexOf(q)===0||(q.length>=3&&q.indexOf(a)===0)});
+  if(hit)return true;
+  if(q.length>=3)return norm(e.m+' '+e.ru).indexOf(q)>-1;
+  return false;
+}
+
+function render(){
+  var q=norm($('q').value.trim());
+  var res=D.filter(function(e){return match(e,q)});
+  if(byHard)res=res.slice().sort(function(a,b){return (a.p===null?101:a.p)-(b.p===null?101:b.p)});
+  var L=$('list');L.textContent='';
+  if(!res.length){
+    var em=document.createElement('div');em.className='empty';
+    em.textContent='Слова «'+$('q').value.trim()+'» пока нет в словаре. Проверьте написание или попробуйте вставить всю фразу на вкладке «Перевести фразу».';
+    L.appendChild(em);
+  }else res.forEach(function(e){L.appendChild(entryEl(e))});
+  $('count').textContent=q?('Найдено слов: '+res.length):('Всего слов в словаре: '+D.length);
+}
+
+$('q').addEventListener('input',render);
+$('sort').addEventListener('click',function(){
+  byHard=!byHard;this.textContent=byHard?'Показать по алфавиту':'Показать сначала самые непонятные';render();
+});
+var ch=$('chips');
+D.filter(function(e){return ['Вайб','Кринж','Имба','Флекс','Скуф','Рофл'].indexOf(e.w)>-1}).forEach(function(e){
+  var b=document.createElement('button');b.type='button';b.textContent=e.w;
+  b.addEventListener('click',function(){$('q').value=e.w;render();});ch.appendChild(b);
+});
+
+function findEntry(tok){
+  var t=norm(tok);
+  for(var k=0;k<D.length;k++){if((D[k].x||[]).indexOf(t)>-1)return D[k];}
+  for(var i=0;i<D.length;i++){
+    for(var j=0;j<D[i].al.length;j++){
+      var a=D[i].al[j];
+      if(t.indexOf(a)===0&&t.length<=a.length+5)return D[i];
+    }
+  }
+  return null;
+}
+
+function translate(){
+  var txt=$('phrase').value;
+  var out=$('out'),fd=$('found');out.textContent='';fd.textContent='';
+  if(!txt.trim()){out.textContent='Здесь появится фраза с выделенными сленговыми словами.';return;}
+  var seen=[],last=0,re=/[A-Za-zА-Яа-яЁё]+/g,m;
+  while((m=re.exec(txt))){
+    var e=findEntry(m[0]);
+    if(e){
+      out.appendChild(document.createTextNode(txt.slice(last,m.index)));
+      var k=document.createElement('mark');k.textContent=m[0];k.title=e.ru;out.appendChild(k);
+      last=m.index+m[0].length;
+      if(seen.indexOf(e)<0)seen.push(e);
+    }
+  }
+  out.appendChild(document.createTextNode(txt.slice(last)));
+  if(!seen.length){
+    var n=document.createElement('div');n.className='empty';
+    n.textContent='Знакомых нам сленговых слов во фразе не нашлось. Словарь пока небольшой: попробуйте найти слово вручную на вкладке «Найти слово».';
+    fd.appendChild(n);return;
+  }
+  seen.forEach(function(e){fd.appendChild(entryEl(e))});
+}
+$('phrase').addEventListener('input',translate);
+var sm=$('samples');
+['У этой кофейни классный вайб','Не байтись на это, он просто нпс','Я словил тильт, а он в прайме и с кучей свэга'].forEach(function(s){
+  var b=document.createElement('button');b.type='button';b.textContent=s;
+  b.addEventListener('click',function(){$('phrase').value=s;translate();});sm.appendChild(b);
+});
+
+var tabs=[['t1','p1'],['t2','p2']];
+tabs.forEach(function(pair){
+  $(pair[0]).addEventListener('click',function(){
+    tabs.forEach(function(x){
+      var on=x[0]===pair[0];
+      $(x[0]).setAttribute('aria-selected',on);
+      $(x[1]).hidden=!on;
+    });
+  });
+});
+var R=[['Вайб',93,100],['NPC',93,60],['Имба',100,20],['Тильт',86,40],['Свэг',100,20],['Пикми',79,80],['Скуф',93,40]];
+var CH=$('chart');
+R.forEach(function(r){
+  var row=document.createElement('div');row.className='crow';
+  var n=document.createElement('b');n.textContent=r[0];row.appendChild(n);
+  var bars=document.createElement('div');
+  [[r[1],'var(--blue)'],[r[2],'var(--red)']].forEach(function(v){
+    var l=document.createElement('div');l.className='bl';
+    var tr=document.createElement('div');tr.className='tr';
+    var i=document.createElement('i');i.style.width=v[0]+'%';i.style.background=v[1];tr.appendChild(i);
+    var em=document.createElement('em');em.textContent=v[0]+'%';
+    l.appendChild(tr);l.appendChild(em);bars.appendChild(l);
+  });
+  row.appendChild(bars);CH.appendChild(row);
+});
+document.querySelectorAll('[data-go]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var g=b.getAttribute('data-go');
+    if(g==='top'){window.scrollTo({top:0,behavior:'smooth'});}
+    else{$(g).scrollIntoView({behavior:'smooth'});}
+  });
+});
+render();
+</script>
+</body>
+</html>
